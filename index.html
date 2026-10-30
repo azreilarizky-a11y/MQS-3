@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monitoring Technical Publication – Citilink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f3f5f7;--sf:#fff;--ink:#2f3e4e;--mute:#6b7785;--line:#d5dbe1;--brand:#4a6075;--brand2:#4a6075;--soft:#eef2f5;
+--hero:#4a6075;--btn:#6b8499;--del:#c0504a;
+--s0:#7fae90;--s1:#73a5a3;--s2:#c9ae72;--s3:#c48b8b;--shadow:0 1px 2px rgba(47,62,78,.05),0 8px 24px -12px rgba(47,62,78,.12)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161d25;--sf:#1f2832;--ink:#e6ecf2;--mute:#9fb0c0;--line:#34414f;--brand:#6f8faf;--brand2:#a9bccd;--soft:#27323e;--hero:#2f4357;--btn:#4a6075;--del:#d9776f;--s0:#7fae90;--s1:#73a5a3;--s2:#c9ae72;--s3:#c48b8b;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161d25;--sf:#1f2832;--ink:#e6ecf2;--mute:#9fb0c0;--line:#34414f;--brand:#6f8faf;--brand2:#a9bccd;--soft:#27323e;--hero:#2f4357;--btn:#4a6075;--del:#d9776f;--s0:#7fae90;--s1:#73a5a3;--s2:#c9ae72;--s3:#c48b8b;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:14px/1.45 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+.app{height:100%;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:14px;padding:14px 24px;flex-wrap:wrap;background:var(--hero);color:#fff;margin-bottom:14px}
+.logo{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;color:#fff;font-weight:800}
+.top h1{font-size:17px;margin:0;font-weight:800;letter-spacing:-.2px}
+.top p{margin:0;color:#d7e0e8;font-size:12px}
+.tabs{margin-left:auto;display:flex;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px}
+.tabs button{border:0;background:none;color:#d7e0e8;font:600 13px inherit;font-family:inherit;padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button.on{background:#fff;color:#4a6075}
+.slides{flex:1;min-height:0;overflow:hidden}
+.track{display:flex;width:200%;height:100%;transition:transform .5s cubic-bezier(.65,0,.25,1)}
+.track.two{transform:translateX(-50%)}
+.slide{width:50%;height:100%;overflow-y:auto;padding:4px 24px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--sf);color:var(--ink);font:600 12px inherit;font-family:inherit;padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip small{color:var(--mute);margin-left:4px;font-weight:600}
+.chip.on{background:var(--hero);color:#fff;border-color:var(--hero)}.chip.on small{color:inherit;opacity:.7}
+.search{margin-left:auto;border:1px solid var(--line);background:var(--sf);color:var(--ink);padding:8px 14px;border-radius:999px;font:500 13px inherit;font-family:inherit;width:220px}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.kpi{padding:16px 18px;position:relative;overflow:hidden}
+.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--a,var(--brand))}
+.kpi .l{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute);font-weight:700}
+.kpi .v{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1.15;margin-top:2px}
+.kpi .v small{font-size:13px;font-weight:600;color:var(--mute);letter-spacing:0;margin-left:4px}
+.kpi .s{font-size:12px;color:var(--mute);margin-top:2px}
+.meter{height:6px;border-radius:9px;background:var(--line);margin-top:8px;overflow:hidden}.meter i{display:block;height:100%;background:var(--s0);border-radius:9px;transition:width .6s}
+.range{display:flex;align-items:center;gap:8px;margin-top:6px;font-weight:800;font-size:15px;flex-wrap:wrap}
+.range span{font-size:12px;color:var(--mute);font-weight:600}
+.range em{font-style:normal;color:var(--brand)}
+.main{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(280px,1fr);gap:12px;align-items:start}
+.side{display:grid;gap:12px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px 8px;flex-wrap:wrap}
+.hd h2{margin:0;font-size:14px;font-weight:800}
+.lg{font-size:11px;color:var(--mute);display:flex;gap:12px;align-items:center}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid var(--mute);vertical-align:-1px;margin-right:4px}.dot.f{background:var(--mute)}
+.tw{max-height:calc(100vh - 330px);min-height:360px;overflow:auto}
+table{width:100%;border-collapse:collapse}
+th{position:sticky;top:0;background:#7a93a8;z-index:2;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;color:#fff;padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:hover td{background:color-mix(in srgb,var(--brand) 5%,transparent)}
+.g{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;padding:2px 7px;border-radius:6px;background:var(--soft);color:var(--brand2);border:1px solid var(--line);margin-right:6px}
+.new{background:var(--btn);color:#fff}
+.doc b{font-size:13px}.doc small{display:block;color:var(--mute);font-size:11.5px;max-width:250px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dt b{display:block;font-size:12.5px;white-space:nowrap}.dt small{color:var(--mute);font-size:11px;white-space:nowrap}
+.dt.cur b{color:var(--ink)}
+.tl{min-width:150px;width:22%}
+.trk{position:relative;height:14px}.trk:before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:var(--line);border-radius:2px}
+.trk .ln{position:absolute;top:5px;height:4px;border-radius:4px;background:var(--c);opacity:.35}
+.trk .p,.trk .c{position:absolute;top:2px;width:10px;height:10px;border-radius:50%;margin-left:-5px;border:2px solid var(--c);background:var(--sf)}
+.trk .c{background:var(--c)}
+.iv{font-size:10.5px;color:var(--mute);margin-top:1px}
+.bd{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;color:#fff;background:var(--c);white-space:nowrap}
+.age{font-size:11px;color:var(--mute);margin-top:2px}
+.donut{display:flex;align-items:center;gap:14px;padding:6px 18px 16px}
+.donut svg{width:132px;height:132px;flex:none}
+.donut .ct{font-size:24px;font-weight:800;fill:var(--ink)}.donut .cs{font-size:9px;fill:var(--mute);font-weight:600}
+.keys{display:grid;gap:4px;flex:1}
+.key{display:flex;align-items:center;gap:8px;font-size:12px;border:0;background:none;color:var(--ink);padding:5px 8px;border-radius:8px;cursor:pointer;font-family:inherit;text-align:left;width:100%}
+.key:hover,.key.on{background:var(--soft)}
+.key i{width:10px;height:10px;border-radius:3px;background:var(--c)}.key b{margin-left:auto}
+.gb{padding:0 18px 16px;display:grid;gap:6px}
+.gr{display:grid;grid-template-columns:78px 1fr 28px;gap:8px;align-items:center;font-size:12px;cursor:pointer;border-radius:8px;padding:2px 4px}
+.gr:hover,.gr.on{background:var(--soft)}
+.gr span{font-weight:700}.gr em{font-style:normal;color:var(--mute);text-align:right}
+.stk{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--line)}.stk i{background:var(--c);transition:flex .5s}
+.foot{color:var(--mute);font-size:11px;margin-top:12px}
+.empty{padding:36px;text-align:center;color:var(--mute)}
+/* slide 2 */
+.form{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+.fb{padding:20px 22px}
+.fb h2,.lst h2{margin:0 0 4px;font-size:18px;font-weight:800;letter-spacing:-.3px}
+.fb>p{margin:0 0 16px;color:var(--mute);font-size:13px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+label{display:block;font-size:11px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.6px}
+input,select{width:100%;margin-top:5px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:500 14px inherit;font-family:inherit}
+input:focus,.search:focus{outline:2px solid var(--brand);outline-offset:1px}
+.pc{border:1px dashed var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.pc h3{margin:0 0 8px;font-size:12px;font-weight:800;display:flex;align-items:center;gap:6px}
+.pc .fr{margin:0}
+.pv{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--soft);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:13px}
+.pv b{font-weight:800}
+.btn{border:0;border-radius:12px;padding:12px 20px;font:700 14px inherit;font-family:inherit;cursor:pointer;background:var(--btn);color:#fff}
+.btn.g2{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.lst{padding:20px 22px}
+.it{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.it .doc{flex:1;min-width:0}.it .doc small{max-width:none}
+.x{border:0;background:none;color:var(--del);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:8px}.x:hover{background:color-mix(in srgb,var(--del) 12%,transparent)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:9}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:980px){.kpis{grid-template-columns:repeat(2,1fr)}.main,.form{grid-template-columns:1fr}.tw{max-height:420px}}
+@media(max-width:620px){.slide{padding:4px 12px 24px}.top{padding:12px}.tl,.hide-s{display:none}.search{width:100%;margin-left:0}.fr{grid-template-columns:1fr}.tabs{margin-left:0;width:100%}.tabs button{flex:1}}
+
+[hidden]{display:none!important}
+:root{--hero:linear-gradient(120deg,#0a3b38,#0f6b57);--brand:#0f6b57;--btn:#0f6b57;--brand2:#0f6b57;--bg:#e8f0ed}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--hero:linear-gradient(120deg,#0a2a29,#0c4a40);--brand:#4fc3a1;--brand2:#7fdcc0;--btn:#12806a;--bg:#0d1917;--sf:#14241f;--soft:#1b302a;--line:#27413a}}
+:root[data-theme=dark]{--hero:linear-gradient(120deg,#0a2a29,#0c4a40);--brand:#4fc3a1;--brand2:#7fdcc0;--btn:#12806a;--bg:#0d1917;--sf:#14241f;--soft:#1b302a;--line:#27413a}
+.top{padding:20px 28px 26px;margin-bottom:-6px}.top h1{font-size:21px}.logo{width:44px;height:44px;font-size:15px}
+.tabs button.on{color:#0a3b38}.chip.on{border-color:transparent}
+.card{border:0;border-radius:20px}.kpi:before{display:none}.kpi{background:linear-gradient(160deg,var(--sf),color-mix(in srgb,var(--a,var(--brand)) 12%,var(--sf)))}
+.kpi .v{font-size:38px;color:var(--a,var(--ink))}.kpi .l{letter-spacing:.3px;text-transform:none;font-size:12.5px}
+th{background:var(--soft);color:var(--mute)}.hd h2{font-size:16px}.bd{padding:4px 11px}
+.gate{max-width:380px;margin:50px auto;padding:30px;text-align:center}.gate h2{margin:0 0 6px;font-size:20px}.gate p{color:var(--mute);margin:0 0 14px}
+.gate input{text-align:center;font-size:26px;letter-spacing:.45em;margin:6px 0}.err{color:var(--del);min-height:22px;font-size:13px;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="logo">MQ</div>
+    <div><h1>Monitoring Technical Publication</h1><p id="asof">Citilink Manual</p></div>
+    <nav class="tabs" role="tablist"><button class="on" data-go="0">Dashboard</button><button data-go="1">Tambah Data 🔒</button></nav>
+  </header>
+  <main class="slides"><div class="track" id="track">
+
+  <section class="slide" id="s1" aria-label="Dashboard"><div class="wrap">
+    <div class="bar"><div class="chips" id="chips"></div><input class="search" id="q" type="search" placeholder="Cari kode / judul…"></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="main">
+      <div class="card">
+        <div class="hd"><h2>Previous → Current Revision</h2><div class="lg"><span><i class="dot"></i>Previous</span><span><i class="dot f"></i>Current</span><span id="cnt"></span></div></div>
+        <div class="tw"><table><thead><tr><th>Dokumen</th><th>Previous</th><th>Current</th><th class="tl"><span id="t0"></span> → hari ini</th><th>Status</th></tr></thead><tbody id="tb"></tbody></table></div>
+      </div>
+      <div class="side">
+        <div class="card"><div class="hd"><h2>Status update</h2><div class="lg">klik untuk filter tabel</div></div><div class="donut" id="donut"></div></div>
+        <div class="card"><div class="hd"><h2>Per kelompok manual</h2></div><div class="gb" id="gb"></div></div>
+      </div>
+    </div>
+    <p class="foot">Umur = hari sejak Current Date sampai hari ini · Interval = Current Date − Previous Date · Data Previous bersifat dummy (sesuai file Excel) · Revisi bernilai “***” atau “-” ditampilkan “—”.</p>
+  </div></section>
+
+  <section class="slide" id="s2" aria-label="Tambah data"><div class="wrap"><div class="card gate" id="gate"><h2>Masukkan PIN akses</h2><p>Halaman tambah data hanya untuk petugas berwenang.</p><input id="pin" type="password" inputmode="numeric" maxlength="6" autocomplete="off" aria-label="PIN"><div class="err" id="ge"></div><button class="btn" id="go">Buka halaman</button></div><div class="form" id="adm" hidden>
+    <div class="card fb">
+      <h2>Tambah dokumen baru</h2><p>Isi data revisi, lalu dashboard langsung ikut terhitung ulang.</p>
+      <div class="fr"><label>Kelompok<input id="f-g" list="gl" placeholder="mis. A320 / kelompok baru" autocomplete="off"></label><label>Kode dokumen<input id="f-c" placeholder="mis. AMM"></label></div>
+      <div class="fr" style="grid-template-columns:1fr"><label>Judul dokumen<input id="f-t" placeholder="mis. Aircraft Maintenance Manual"></label></div>
+      <div class="pc"><h3><i class="dot"></i>Previous revision</h3><div class="fr"><label>Revision<input id="f-pr" placeholder="mis. Rev 03"></label><label>Tanggal<input id="f-pd" type="date"></label></div></div>
+      <div class="pc" style="border-style:solid;border-color:var(--brand)"><h3><i class="dot f" style="border-color:var(--brand);background:var(--brand)"></i>Current revision</h3><div class="fr"><label>Revision<input id="f-cr" placeholder="mis. Rev 04"></label><label>Tanggal<input id="f-cd" type="date"></label></div></div>
+      <div class="pv" id="pv"></div>
+      <div class="acts"><button class="btn" id="add">+ Tambah ke dashboard</button><button class="btn g2" id="clr">Kosongkan</button></div>
+      <datalist id="gl"></datalist>
+    </div>
+    <div class="card lst"><h2>Data yang ditambahkan</h2><p style="margin:0 0 8px;color:var(--mute);font-size:13px" id="lsub"></p><div id="lst"></div>
+      <div class="acts" style="margin-top:14px"><button class="btn g2" data-go="0">← Lihat dashboard</button><button class="btn g2" id="wipe" style="color:var(--del)">Hapus semua</button></div>
+      <p class="foot">Data tambahan tersimpan di browser ini saja.</p><h2 style="margin-top:22px;font-size:15px">Ubah PIN</h2><div class="fr"><label>PIN lama<input id="p0" type="password" inputmode="numeric" maxlength="6"></label><label>PIN baru (4–6 angka)<input id="p1" type="password" inputmode="numeric" maxlength="6"></label></div><button class="btn g2" id="psv">Simpan PIN</button></div>
+  </div></div></section>
+
+  </div></main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const RAW=[["CTV","CMM","Company Maintenance Manual","Issue 04, Revision 06","2026-08-03","Issue 04, Revision 05","2026-04-08"],["CTV","EMTP","Engineering And Maintenance Training Program","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","MIM","Minor Inspection Manual","Issue 02, Revision 10","2026-04-29","Issue 02, Revision 09","2026-02-28"],["CTV","MP A320","Maintenance Program A320","Issue 02, Revision 03","2025-12-05","Issue 02, Revision 02","2025-08-15"],["CTV","MP ATR","Maintenance Program ATR","Issue 02, Revision 05","2025-11-28","Issue 02, Revision 04","2025-09-10"],["CTV","MP B737","Maintenance Program B737","Issue 02, Revision 02","2025-10-25","Issue 02, Revision 01","2025-04-16"],["CTV","RCPM","Reliability Control Program Manual","Issue 02, Revision 02","2025-11-28","Issue 02, Revision 01","2025-09-10"],["CTV","TFM","Technical Form Manual","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","WBM","Weiht & Balance Manual","Issue 02, Revision 03","2026-04-30","Issue 02, Revision 02","2025-10-06"],["CTV","MEL A320","Minimum Equipment List - A320","Issue 02, Revision 00","2026-05-22","Issue 01, Revision 04","2025-12-29"],["CTV","MEL ATR","Minimum Equipment List - ATR","Issue 01, Revision 13","2026-06-12","Issue 01, Revision 12","2026-03-03"],["CTV","MEL B737","Minimum Equipment List - B737","Issue 02, Revision 08","2026-04-03","Issue 02, Revision 07","2025-12-27"],["CTV","TP-MEB.01","Budget Preparation","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MEB.02","Service Level Agreement","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MEC.01","Cabin Facilities Functional Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.01","MP Development","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MET.02","Engineering Review Committee","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.03","Engineering Order Handling","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.04","Customized MEL Development and Revision","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MET.06","PMA Monitor and Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.07","PMA Evaluation and Approval","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.08","Aircraft Significant Event or Defect","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.09","Engine Performance Trend and Monitoring","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.10","Engine & APU Reliability Control Program & Monitoring","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.11","Engine & APU Health Assessment","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.12","Engine & APU Removal Forecast","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.15","Master Part List Component","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MET.16","Powerplant Phase-In Evaluation","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MET.17","Landing Gear Shop Visit","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.18","Airborne Software Configuration Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.19","Structure Damage Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MET.20","Used LLP Control","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MET.21","Engine and APU Shop Visit","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MET.22","Flight Data Handling","Issue 01, Revision 00","2026-03-30","-","2025-05-17"],["CTV","TP-MMC.01","Material Scrap Meeting","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MMC.02","Pooling Request","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MMC.03","TMB Parts","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMC.04","Engine Planning and Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMC.05","APU Planning and Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMC.06","Landing Gear Planning and Control","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMC.07","Pooling Component Planning and Control","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MMP.03","Preparation & Control of Yearly Aircraft Maintenance Plan","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMP.04","Control & Monitor Aircraft Base Maintenance TAT","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMP.08","Application & Control Short Term Escalation","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MMP.10","Monthly Aircraft Maintenance Plan","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMP.11","Short and Long Term Aircraft Storage Monitoring","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMP.12","Weekly Workload Plan","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMP.13","Maintenance Task Withdrawn","Issue 01, Revision 00","2026-03-30","-","2025-05-17"],["CTV","TP-MMT.01","Day to Day Control and Monitoring","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMT.02","Monitoring STA Delay & Corrective Action","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMT.03","Standard Technical Handling Agreement","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMT.04","TDAM (Technical Delay Analysis Meeting)","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMT.05","Technical Handling Set Up for New Route","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMT.06","Monitoring Repeated Discrepancy","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MMT.07","HIL Control and Monitoring","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MQC.02","Risk Based Ramp Inspection & Surveillance","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQC.03","Surveillance","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MQC.04","SDR (Service Difficulty Report)","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQC.05","Accident or Incident Investigation","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MQC.06","Flight Test After Maintenance","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQC.08","HIL Extension","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MQC.09","Approved Vendor List","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQC.11","MISR","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MQC.12","Corrective Action Effectiveness Surveillance","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MQS.02","Aircraft Certificate","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MQS.03","Aircraft Document Distribution","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.04","Manual Review","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.05","Company Authorization","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.06","ACL Development","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.07","Training Program","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.08","Technical Document & Manual Revision","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MQS.09","Airworthiness Directive Control","Issue 04, Revision 00","2026-03-30","Issue 03, Revision 04","2025-05-17"],["CTV","TP-MQS.10","Issue RII Authorization","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.11","Phase In Phase Out Delivery Doc","Issue 03, Revision 00","2026-03-30","Issue 02, Revision 04","2025-05-17"],["CTV","TP-MQS.12","Airworthiness Record Surveillance","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MQS.15","LLP and Component Status","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MQS.17","AML Control","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["CTV","TP-MQS.18","Aircraft Deregistration","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["A320","AFM","Airplane Flight Manual CTV - PDF Format","***","2026-09-02","***","2026-02-28"],["A320","AIRNAV","AIRNAV / PLANNING","50","2025-11-01","49","2024-10-05"],["A320","AIRNAV","AIRNAV / REPAIR","76","2026-08-01","75","2025-09-07"],["A320","AIRNAVX","AIRNAV / STANDALONE","30","2026-08-01","29","2025-09-07"],["A320","CCOM","Cabin Crew Operating Manual CTV - PDF Format","***","2026-04-15","***","2025-09-12"],["A320","CMMM","Component Maintenance Manual Manufacture","129","2026-07-01","128","2026-01-04"],["A320","FCOM","Flight Crew Operating Manual CTV - PDF Format","***","2026-08-26","***","2025-11-12"],["A320","FCTM","Flight Crew Techniques Manual CTV - PDF Format","***","2026-08-26","***","2025-11-12"],["A320","MMEL","Master Minimum Equipment List CTV - PDF Format","***","2026-08-19","***","2025-10-28"],["A320","MPD","Maintenance Planning Document","50","2025-11-01","49","2024-10-05"],["A320","MRBR","Maintenance Review Board Report","27","2024-11-01","26","2023-12-16"],["A320","QRH","Quick Reference Handbook CTV - PDF Format","***","2026-08-26","***","2025-11-12"],["A320","WBM","Weight and Balance Manual - PDF Format","***","2026-04-23","***","2025-04-22"],["ATR","AFM","Airplane Flight Manual CTV","85","2026-08-14","84","2025-06-21"],["ATR","ATRNAVX","ATRnavX Standalone","13","2026-07-01","12","2026-01-04"],["ATR","CCOM","Cabin Crew Operating Manual CTV","6","2025-04-14","5","2025-02-05"],["ATR","CMD","Consumable Material Data (CMD)","24","2026-07-01","23","2026-01-04"],["ATR","FCOM","Flight Crew Operations Manual - CTV","85","2026-08-14","84","2025-06-21"],["ATR","MMEL","Master Minimum Equipment List","19","2026-06-12","18","2026-03-03"],["ATR","MPD","Maintenance Planning Document (MPD)","38","2026-07-29","37","2025-11-09"],["ATR","MRBR","Maintenance Review Board Report (MRBR)","32","2026-07-30","31","2025-06-22"],["ATR","NDTM","Non Destructive Testing Manual (NDTM)","44","2023-12-01","43","2022-10-09"],["ATR","QRH","Quick Reference Handbook","85","2026-08-14","84","2025-06-21"],["ATR","SRM","Structural Repair Manual (SRM)","124","2026-09-01","123","2025-11-25"],["ATR","TL","Time Limits (TL)","23","2025-05-20","22","2025-02-27"],["ATR","WBM","Weight and Balance Manual (WBM)","14","2026-06-03","13","2025-09-13"],["ATR","EMM PW127","Engine Maintenance Manual PW127","78","2026-06-15","77","2025-09-08"],["ATR","IPC PW127","Illustrated Part Catalog PW127","74","2026-08-31","73","2026-04-06"],["ATR","GHM","Ground Handling Manual","2","2025-12-18","1","2025-05-08"],["ATR","AC","Aircraft Characteristics Airport Planning","2","2026-03-03","1","2025-11-10"],["B737","AMM","Aircraft Maintenance Manual - D6-390K1","104","2026-09-25","103","2026-02-24"],["B737","IPC","Illustrated Parts Catalog - D6-38550-GIA-0157","11","2026-09-25","10","2026-02-24"],["B737","MPD","Maintenance Planning Document - MSG-3","-","2026-09-25","-","2026-02-24"],["B737","MRBR","Maintenance Review Board Report","-","2024-08-14","-","2023-10-05"],["B737","SRM","Structural Repair Manual - 737-500 - D6-38441","117","2026-07-10","116","2025-07-01"],["B737","SRM","Structural Repair Manual - 737-300 - D6-37635","138","2025-11-10","137","2025-08-07"],["B737","SSM","System Schematic Manual (SSM) -","3","2024-10-01","2","2024-08-01"],["B737","SWPM","Standard Wiring Practice Manual","92","2026-06-15","91","2025-09-08"],["B737","TC","Task Card MSG-3","-","2026-09-25","-","2026-02-24"],["B737","WDM","Wiring Diagram Manual","3","2024-10-01","2","2024-08-01"],["B737","FCOM - QRH","Flight Crew Operation Manual","4","2026-07-31","3","2026-06-04"],["SAMS","AIRNAVX","AIRNAVX STANDALONE","Rev 30","2026-08-01","Rev 29","2025-09-07"],["SAMS","CMM","Company Maintenance Manual","Issue 04, Revision 06","2026-08-03","Issue 04, Revision 05","2026-04-08"],["SAMS","MIM","Minor Inspection Manual","Issue 02, Revision 10","2026-04-29","Issue 02, Revision 09","2026-02-28"],["SAMS","MEL A320","Minimum Equipment List - A320","Issue 02, Revision 00","2026-05-22","Issue 01, Revision 04","2025-12-29"],["SAMS","CDL","Configuration Deviation List","-","2026-07-09","-","2025-09-19"],["SAMS","WBM","Weight and Blance A320","-","2026-04-23","-","2025-04-22"],["SAMS","-","Diversion Report Master Form","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["SAMS","-","Technical Trouble Delay Master Form","Issue 02, Revision 00","2026-03-30","Issue 01, Revision 04","2025-05-17"],["SAMS","-","CTV ERP Manual","Issue 04, Revision 03","2026-07-08","Issue 04, Revision 02","2026-05-05"],["SAMS","-","Emergency Contact List","-","2026-09-25","-","2026-02-24"],["POS AVIATION","AFM","Airplane Flight Manual CTV - PDF Format","***","2025-12-02","***","2025-05-12"],["POS AVIATION","AIRNAV","AIRNAV / PLANNING","50","2025-11-01","49","2024-10-05"],["POS AVIATION","AIRNAV","AIRNAV / REPAIR","73","2026-02-01","72","2025-01-22"],["POS AVIATION","AIRNAVX","AIRNAVX STANDALONE","30","2026-08-01","29","2025-09-07"],["POS AVIATION","CCOM","Cabin Crew Operating Manual CTV - PDF Format","***","2025-10-09","***","2024-11-16"],["POS AVIATION","CMMM","Component Maintenance Manual Manufacture","127","2026-01-01","126","2025-10-26"],["POS AVIATION","FCOM","Flight Crew Operating Manual CTV - PDF Format","***","2025-12-16","***","2025-09-11"],["POS AVIATION","FCTM","Flight Crew Techniques Manual CTV - PDF Format","***","2025-12-16","***","2025-09-11"],["POS AVIATION","MMEL","Master Minimum Equipment List CTV - PDF Format","***","2025-11-19","***","2025-03-10"],["POS AVIATION","MPD","Maintenance Planning Document","50","2025-11-01","49","2024-10-05"],["POS AVIATION","MRBR","Maintenance Review Board Report","27","2024-11-01","26","2023-12-16"],["POS AVIATION","QRH","Quick Reference Handbook CTV - PDF Format","***","2026-01-27","***","2025-05-18"],["POS AVIATION","CMM","Company Maintenance Manual","Issue 04, Revision 06","2026-08-03","Issue 04, Revision 05","2026-04-08"],["POS AVIATION","MIM","Minor Inspection Manual","Issue 02, Revision 10","2026-04-29","Issue 02, Revision 09","2026-02-28"],["POS AVIATION","MEL A320","Minimum Equipment List - A320","Issue 02, Revision 00","2026-05-22","Issue 01, Revision 04","2025-12-29"]];
+const MON=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+const ST=[["0–90 hari","--s0"],["91–180 hari","--s1"],["181–365 hari","--s2"],["> 1 tahun","--s3"]];
+const $=s=>document.querySelector(s), esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const toDay=i=>{if(!i)return null;const[y,m,d]=i.split("-").map(Number);return Math.round(Date.UTC(y,m-1,d)/864e5)};
+const fmt=n=>{const d=new Date(n*864e5);return d.getUTCDate()+" "+MON[d.getUTCMonth()]+" "+d.getUTCFullYear()};
+const rv=s=>(!s||s==="-"||s==="***")?"—":s;
+const n0=new Date(), TODAY=Math.round(Date.UTC(n0.getFullYear(),n0.getMonth(),n0.getDate())/864e5);
+const stOf=a=>a<=90?0:a<=180?1:a<=365?2:3;
+const mk=(r,added)=>{const o={g:r[0],c:r[1],t:r[2],cr:r[3],cd:toDay(r[4]),pr:r[5],pd:toDay(r[6]),added:!!added};o.age=TODAY-o.cd;o.iv=o.pd==null?null:o.cd-o.pd;o.st=stOf(o.age);return o};
+const BASE=RAW.map(r=>mk(r,false));
+let ADDED=[];try{ADDED=JSON.parse(localStorage.getItem("mtp_added_v1")||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem("mtp_added_v1",JSON.stringify(ADDED))}catch(e){}};
+const all=()=>BASE.concat(ADDED.map(r=>mk(r,true)));
+let grp="ALL",q="",stf=-1;
+
+function groups(rows){const g=[];rows.forEach(r=>{if(!g.includes(r.g))g.push(r.g)});return g}
+const hit=(r)=>!q||(r.g+" "+r.c+" "+r.t).toLowerCase().includes(q);
+
+function render(){
+  const rows=all(), qrows=rows.filter(hit), base=qrows.filter(r=>grp==="ALL"||r.g===grp), G=groups(rows);
+  $("#asof").textContent="Citilink Manual · per "+fmt(TODAY)+" · "+rows.length+" dokumen";
+  $("#chips").innerHTML=[["ALL","Semua",qrows.length]].concat(G.map(g=>[g,g,qrows.filter(r=>r.g===g).length])).map(([k,l,n])=>`<button class="chip ${grp===k?"on":""}" data-g="${esc(k)}">${esc(l)}<small>${n}</small></button>`).join("");
+  // KPIs
+  const n=base.length, up=base.filter(r=>r.age<=180).length, ivs=base.filter(r=>r.iv!=null), avg=ivs.length?Math.round(ivs.reduce((a,r)=>a+r.iv,0)/ivs.length):0;
+  const rate=n?Math.round(up/n*100):0, mx=base.length?Math.max(...base.map(r=>r.cd)):null, lastR=base.filter(r=>r.cd===mx), L=lastR[0];
+  const old=n?base.reduce((a,r)=>r.age>a.age?r:a):null;
+  $("#kpis").innerHTML=
+   `<div class="card kpi"><div class="l">Total dokumen</div><div class="v">${n}</div><div class="s">${new Set(base.map(r=>r.g)).size} kelompok · ${base.filter(r=>r.age<=30).length} direvisi ≤30 hari</div></div>`+
+   `<div class="card kpi" style="--a:var(--s0)"><div class="l">Update rate ≤180 hari</div><div class="v">${rate}<small>%</small></div><div class="meter"><i style="width:${rate}%"></i></div><div class="s">${up} dari ${n} dokumen</div></div>`+
+   `<div class="card kpi" style="--a:var(--s1)"><div class="l">Rata-rata interval revisi</div><div class="v">${avg}<small>hari</small></div><div class="s">rata-rata Current − Previous</div></div>`+
+   (L?`<div class="card kpi" style="--a:var(--s2)"><div class="l">Revisi terakhir</div><div class="range">${esc(L.c)} · ${esc(L.g)}${lastR.length>1?` <span>+${lastR.length-1} lain</span>`:""}</div><div class="range" style="font-size:13px;margin-top:2px">${L.pd!=null?`<span>${fmt(L.pd)}</span> → `:""}<em>${fmt(L.cd)}</em></div><div class="s">terlama: ${esc(old.c)} · ${old.age} hari</div></div>`:`<div class="card kpi"><div class="l">Revisi terakhir</div><div class="v">—</div></div>`);
+  // donut
+  const cnt=[0,0,0,0];base.forEach(r=>cnt[r.st]++);const C=2*Math.PI*52;let off=0,segs="";
+  cnt.forEach((c,i)=>{if(!c)return;const len=c/(n||1)*C;segs+=`<circle cx="70" cy="70" r="52" fill="none" stroke="var(${ST[i][1]})" stroke-width="16" stroke-dasharray="${Math.max(len-2,0.5)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)" opacity="${stf<0||stf===i?1:.25}"/>`;off+=len});
+  $("#donut").innerHTML=`<svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="52" fill="none" stroke="var(--line)" stroke-width="16"/>${segs}<text class="ct" x="70" y="72" text-anchor="middle">${n}</text><text class="cs" x="70" y="86" text-anchor="middle">DOKUMEN</text></svg><div class="keys">${ST.map((s,i)=>`<button class="key ${stf===i?"on":""}" data-s="${i}" style="--c:var(${s[1]})"><i></i>${s[0]}<b>${cnt[i]}</b></button>`).join("")}</div>`;
+  // group bars
+  $("#gb").innerHTML=G.map(g=>{const gr=qrows.filter(r=>r.g===g),c=[0,0,0,0];gr.forEach(r=>c[r.st]++);return `<div class="gr ${grp===g?"on":""}" data-g="${esc(g)}"><span>${esc(g)}</span><div class="stk">${c.map((v,i)=>`<i style="flex:${v};--c:var(${ST[i][1]})"></i>`).join("")}</div><em>${gr.length}</em></div>`}).join("");
+  // table
+  const lo=Math.min(...rows.map(r=>r.pd??r.cd)), span=TODAY-lo||1, pos=d=>((d-lo)/span*96+2).toFixed(1);
+  $("#t0").textContent=fmt(lo);
+  const tr=base.filter(r=>stf<0||r.st===stf).sort((a,b)=>b.age-a.age);
+  $("#cnt").textContent=tr.length+" dokumen · terlama dulu";
+  $("#tb").innerHTML=tr.length?tr.map(r=>{const c=`style="--c:var(${ST[r.st][1]})"`;
+   return `<tr ${c}><td class="doc"><span class="g ${r.added?"new":""}">${esc(r.g)}</span><b>${esc(r.c)}</b><small title="${esc(r.t)}">${esc(r.t)}</small></td>`+
+   `<td class="dt">${r.pd!=null?`<b>${fmt(r.pd)}</b><small>${esc(rv(r.pr))}</small>`:"<small>—</small>"}</td>`+
+   `<td class="dt cur"><b>${fmt(r.cd)}</b><small>${esc(rv(r.cr))}</small></td>`+
+   `<td class="tl"><div class="trk">${r.pd!=null?`<i class="ln" style="left:${pos(r.pd)}%;width:${(pos(r.cd)-pos(r.pd)).toFixed(1)}%"></i><i class="p" style="left:${pos(r.pd)}%"></i>`:""}<i class="c" style="left:${pos(r.cd)}%"></i></div><div class="iv">${r.iv!=null?"interval "+r.iv+" hari":"—"}</div></td>`+
+   `<td><span class="bd">${ST[r.st][0]}</span><div class="age">${r.age} hari lalu</div></td></tr>`}).join(""):`<tr><td colspan="5" class="empty">Tidak ada dokumen yang cocok.</td></tr>`;
+  $("#gl").innerHTML=G.map(g=>`<option value="${esc(g)}">`).join("");
+  renderList();
+}
+function renderList(){
+  $("#lsub").textContent=ADDED.length?ADDED.length+" dokumen tambahan di dashboard.":"Belum ada. Dokumen yang kamu tambah akan muncul di sini.";
+  $("#lst").innerHTML=ADDED.map((r,i)=>{const o=mk(r,true);return `<div class="it" style="--c:var(${ST[o.st][1]})"><div class="doc"><span class="g new">${esc(r[0])}</span><b>${esc(r[1])}</b><small>${esc(r[2])}</small><small>${r[6]?fmt(o.pd)+" → ":""}<b style="color:var(--ink)">${fmt(o.cd)}</b> · ${ST[o.st][0]}</small></div><button class="x" data-del="${i}" aria-label="Hapus">✕</button></div>`}).join("")}
+// events
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-g]"),s=e.target.closest("[data-s]"),d=e.target.closest("[data-del]"),go=e.target.closest("[data-go]");
+  if(g){grp=grp===g.dataset.g&&g.classList.contains("gr")?"ALL":g.dataset.g;render()}
+  else if(s){stf=stf===+s.dataset.s?-1:+s.dataset.s;render()}
+  else if(d){ADDED.splice(+d.dataset.del,1);save();render()}
+  else if(go)goTo(+go.dataset.go);
+});
+$("#q").addEventListener("input",e=>{q=e.target.value.trim().toLowerCase();render()});
+function goTo(i){$("#track").classList.toggle("two",i===1);document.querySelectorAll(".tabs button").forEach((b,k)=>b.classList.toggle("on",k===i));$("#s1").inert=i===1;$("#s2").inert=i===0;try{history.replaceState(null,"",i?"#tambah":"#")}catch(e){}
+  if(i===0)ok=false;$("#gate").hidden=ok;$("#adm").hidden=!ok;if(i===1&&!ok)setTimeout(()=>$("#pin").focus(),520)}
+document.addEventListener("keydown",e=>{if(/INPUT|SELECT/.test(document.activeElement.tagName))return;if(e.key==="ArrowRight")goTo(1);if(e.key==="ArrowLeft")goTo(0)});
+// form
+const F=id=>$("#f-"+id);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2600)}
+function preview(){const cd=toDay(F("cd").value),pd=toDay(F("pd").value);
+  if(cd==null){$("#pv").innerHTML="<span style='color:var(--mute)'>Isi tanggal Current untuk melihat interval, umur & status.</span>";return}
+  const a=TODAY-cd,s=stOf(a);$("#pv").innerHTML=`<span>Interval <b>${pd!=null?cd-pd+" hari":"—"}</b></span><span>Umur <b>${a} hari</b></span><span class="bd" style="--c:var(${ST[s][1]})">${ST[s][0]}</span>`}
+document.querySelectorAll(".fb input").forEach(i=>i.addEventListener("input",preview));
+function clearForm(){["g","c","t","pr","pd","cr","cd"].forEach(k=>F(k).value="");preview()}
+$("#clr").onclick=clearForm;
+$("#wipe").onclick=()=>{if(!ADDED.length)return;ADDED=[];save();render();toast("Semua data tambahan dihapus")};
+$("#add").onclick=()=>{
+  const v=k=>F(k).value.trim();
+  if(!v("g")||!v("c")||!v("t")||!v("cd"))return toast("Lengkapi kelompok, kode, judul, dan tanggal current");
+  if(v("pd")&&v("pd")>v("cd"))return toast("Previous date tidak boleh setelah current date");
+  ADDED.unshift([v("g"),v("c"),v("t"),v("cr"),v("cd"),v("pr"),v("pd")]);save();grp="ALL";q="";$("#q").value="";render();
+  const g=v("g");["c","t","pr","pd","cr","cd"].forEach(k=>F(k).value="");preview();toast("Ditambahkan: "+ADDED[0][1]+" ("+g+")")};
+const KP="mtp_pin_v2";let ok=false,fails=0,until=0;
+const H=async s=>{try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("mtp"+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return"p"+s}};
+const getP=()=>{try{return localStorage.getItem(KP)}catch(e){return null}};
+const pinOK=async v=>{const p=getP();return p?p===await H(v):v==="1234"};
+$("#go").onclick=async()=>{if(Date.now()<until){$("#ge").textContent="Terlalu banyak percobaan. Coba lagi sebentar.";return}
+  const v=$("#pin").value;$("#pin").value="";
+  if(await pinOK(v)){ok=true;fails=0;$("#ge").textContent="";goTo(1)}else{fails++;$("#ge").textContent="PIN salah.";if(fails>=5){until=Date.now()+3e4;fails=0}}};
+$("#pin").addEventListener("keydown",e=>{if(e.key==="Enter")$("#go").click()});
+$("#psv").onclick=async()=>{if(!await pinOK($("#p0").value))return toast("PIN lama salah");const n=$("#p1").value;if(!/^\d{4,6}$/.test(n))return toast("PIN baru harus 4 sampai 6 angka");
+  try{localStorage.setItem(KP,await H(n))}catch(e){}$("#p0").value=$("#p1").value="";toast("PIN diperbarui")};
+addEventListener("hashchange",()=>goTo(location.hash==="#tambah"?1:0));
+render();preview();goTo(location.hash==="#tambah"?1:0);
+</script>
+</body>
+</html>
